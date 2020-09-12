@@ -1,13 +1,11 @@
 package java_data_structure.chapter1_3;
 
-
 import java.io.*;
 import java.util.Scanner;
 
-// 입력으로 텍스트 파일을 읽어서 모든 단어들의 목록을 만들고 각 단어가 등장하는 횟수를 셈
-// 단어 개수는 100000개 이하라고 가정
-// 사용자가 요청하면 단어 목록을 하나의 파일로 저장. 검색하면 그 단어가 텍스트파일에 몇번 등장하는지 출력
-public class Code22_indexMaker {
+// Code22의 문제점
+// 특수기호가 단어에 포함, 숫자가 단어로 취급, 대소문자가 다른 단어로 취급, 단어 정렬 되도록
+public class Code23_IndexMaker_Improve {
 
     static String[] words = new String[100000];
     static int[] count = new int[100000];
@@ -50,7 +48,11 @@ public class Code22_indexMaker {
             Scanner inFile = new Scanner(new File(fileName));
             while (inFile.hasNext()) { //file의 끝에 도달했는지 검사
                 String str = inFile.next();
-                addWord(str);
+                String trimmed = trimming(str);
+                if (trimmed != null) {
+                    String t = trimmed.toLowerCase();
+                    addWord(t);
+                }
             }
             inFile.close();
         } catch (FileNotFoundException e) {
@@ -64,8 +66,15 @@ public class Code22_indexMaker {
         if (index != -1) { //found (words[index] == str)
             count[index]++;
         } else { // not found
-            words[n] = str;
-            count[n] = 1;
+            // 단어 정렬: 항상 정렬된 상태를 유지하도록 삽입
+            int i = n - 1;
+            while (i >= 0 && words[i].compareTo(str) > 0) {
+                words[i + 1] = words[i];
+                count[i + 1] = count[i];
+                i--;
+            }
+            words[i+1] = str;
+            count[i+1] = 1;
             n++;
         }
     }
@@ -91,9 +100,19 @@ public class Code22_indexMaker {
         }
     }
 
-}
+    // 단어의 앞뒤에 붙은 특수문자 제거하기
+    static String trimming(String str) {
+        int i = 0, j = str.length() - 1;
 
-// 실행 예시
-// read src\java_data_structure\chapter1_3\sample.txt
-// find aaa
-// saveas output.txt
+        while (i < str.length() && !Character.isLetter(str.charAt(i))) // i번째 문자가 알파벳이 아닌 동안 돌음
+            i++;
+
+        while (j > 0 && !Character.isLetter(str.charAt(j))) // i번째 문자가 알파벳이 아닌 동안 돌음
+            j--;
+
+        if (i > j)
+            return null;
+        return str.substring(i, j + 1); // [ )
+    }
+
+}
