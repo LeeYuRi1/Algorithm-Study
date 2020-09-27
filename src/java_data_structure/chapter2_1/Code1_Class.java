@@ -1,6 +1,6 @@
 package java_data_structure.chapter2_1;
 
-public class Code24_Class {
+public class Code1_Class {
     public static void main(String[] args) {
 
         Person1 first;
