@@ -1,0 +1,7 @@
+package java_data_structure.chapter2_1;
+
+public class MyRectangle1 {
+    public MyPoint1 lu;
+    public int width;
+    public int height;
+}
