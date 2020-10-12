@@ -1,0 +1,17 @@
+package algorithm.recursion;
+
+public class Code2 {
+    public static void main(String[] args) {
+        int n = 4;
+        func(n);
+    }
+
+    private static void func(int n) {
+        if (n <= 0)
+            return;
+        else {
+            System.out.println("Hello...");
+            func(n - 1);
+        }
+    }
+}
