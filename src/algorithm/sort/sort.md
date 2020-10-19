@@ -13,7 +13,7 @@
 
 - 시간복잡도: O(n^2)
 
-  ![selection sort](C:\Users\LEE\Desktop\selection sort.JPG)
+![selection sort](https://user-images.githubusercontent.com/33548856/96506099-07c7ec80-1292-11eb-9c97-d32c7ea610bd.JPG)
 
 
 
