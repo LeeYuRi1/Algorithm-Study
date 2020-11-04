@@ -40,6 +40,29 @@
 
 
 
+### Merge sort 합병정렬
+
+- 분할정복법 사용
+  분할: 해결하고자 하는 문제를 작은 크기의 동일한 문제들로 분할
+  정복: 각각의 작은 문제를 순환적(recursion)으로 해결
+  합병: 작은 문제의 해를 합하여(merge) 원래 문제에 대한 해를 구함
+
+![1604486430885](C:\Users\LEE\AppData\Roaming\Typora\typora-user-images\1604486430885.png)
+
+
+
+### Quick sort 빠른 정렬
+
+- 분할정복법 사용
+- pivot을 정해서 pivot보다 작은 값, 큰 값으로 분할
+- 합병은 필요 없음
+
+![1604486149178](C:\Users\LEE\AppData\Roaming\Typora\typora-user-images\1604486149178.png)
+
+
+
+
+
 
 
 출처: 인프런 - 영리한 프로그래밍을 위한 알고리즘 강좌 (권오흠 교수님)

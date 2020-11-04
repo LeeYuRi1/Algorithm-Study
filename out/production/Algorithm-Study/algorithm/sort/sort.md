@@ -13,7 +13,7 @@
 
 - 시간복잡도: O(n^2)
 
-  ![selection sort](C:\Users\LEE\Desktop\selection sort.JPG)
+![selection sort](https://user-images.githubusercontent.com/33548856/96506099-07c7ec80-1292-11eb-9c97-d32c7ea610bd.JPG)
 
 
 
@@ -23,7 +23,7 @@
   현재 원소와 다음 원소를 비교하여 현재 원소가 더 크면 자리를 바꿈
 - 시간복잡도: O(n^2)
 
-![1603126765941](C:\Users\LEE\AppData\Roaming\Typora\typora-user-images\1603126765941.png)
+![1603126765941](https://user-images.githubusercontent.com/33548856/96506231-3fcf2f80-1292-11eb-9852-9e76b2672265.png)
 
 
 
@@ -34,9 +34,9 @@
   앞에서부터 검사하면 모든 데이터들을 검사해야함. 뒤에서부터 검사하면 앞쪽 데이터는 검사하지 않음 - 뒤에서부터 검사하는 것이 효율적
 - 시간복잡도: O(n^2)
 
-![1603128053883](C:\Users\LEE\AppData\Roaming\Typora\typora-user-images\1603128053883.png)
+![1603128053883](https://user-images.githubusercontent.com/33548856/96506313-61c8b200-1292-11eb-9d11-da6ce8805aeb.png)
 
-![1603128267874](C:\Users\LEE\AppData\Roaming\Typora\typora-user-images\1603128267874.png)
+![1603128267874](https://user-images.githubusercontent.com/33548856/96506337-6ab98380-1292-11eb-9b2e-491c82e34cee.png)
 
 
 
