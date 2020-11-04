@@ -47,7 +47,7 @@
 - 정복: 각각의 작은 문제를 순환적(recursion)으로 해결
 - 합병: 작은 문제의 해를 합하여(merge) 원래 문제에 대한 해를 구함
 
-![1604486430885](https://user-images.githubusercontent.com/33548856/98102004-5c947580-1ed6-11eb-9d28-f3bc056226f8.png)
+![1604486430885](https://user-images.githubusercontent.com/33548856/98102632-260b2a80-1ed7-11eb-86e2-4e7b1ede4982.png)
 
 
 
