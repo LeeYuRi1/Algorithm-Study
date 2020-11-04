@@ -47,7 +47,7 @@
   정복: 각각의 작은 문제를 순환적(recursion)으로 해결
   합병: 작은 문제의 해를 합하여(merge) 원래 문제에 대한 해를 구함
 
-![1604486430885](C:\Users\LEE\AppData\Roaming\Typora\typora-user-images\1604486430885.png)
+![1604486430885](https://user-images.githubusercontent.com/33548856/98102004-5c947580-1ed6-11eb-9d28-f3bc056226f8.png)
 
 
 
@@ -57,7 +57,7 @@
 - pivot을 정해서 pivot보다 작은 값, 큰 값으로 분할
 - 합병은 필요 없음
 
-![1604486149178](C:\Users\LEE\AppData\Roaming\Typora\typora-user-images\1604486149178.png)
+![1604486149178](https://user-images.githubusercontent.com/33548856/98102050-6ddd8200-1ed6-11eb-80b5-22b6f8d397c9.png)
 
 
 
