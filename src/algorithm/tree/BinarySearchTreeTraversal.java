@@ -22,19 +22,18 @@ public class BinarySearchTreeTraversal {
     public void preorderTreeWalk(Node node) {
         if (node != null) {
             System.out.print(node.data);
-            inorderTreeWalk(node.left);
-            inorderTreeWalk(node.right);
+            preorderTreeWalk(node.left);
+            preorderTreeWalk(node.right);
         }
     }
 
     //후순위(postorder) 순회
     public void postorderTreeWalk(Node node) {
         if (node != null) {
-            inorderTreeWalk(node.left);
-            inorderTreeWalk(node.right);
+            postorderTreeWalk(node.left);
+            postorderTreeWalk(node.right);
             System.out.print(node.data);
         }
     }
-
 
 }

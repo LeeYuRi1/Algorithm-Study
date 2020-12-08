@@ -64,13 +64,71 @@ public class BinarySearchTree {
                 x = x.right;
         }
         z.p = y;
-        if (y == null) { //empty tree인 경우
+        if (y == null)  //empty tree인 경우
             t.root = z;
+        else {
             if (z.data < y.data)
                 y.left = z;
             else
                 y.right = z;
         }
+        size++;
+    }
+
+    public Node delete(BinarySearchTree t, Node z) {
+        Node y = null;
+        Node x = null;
+
+        if (z.left == null || z.right == null) //z는 자식노드가 0개나 1개
+            y = z;
+        else
+            y = successor(z);
+
+        //노드 y를 삭제
+        if (y.left != null) // y는 자식이 0개나 1개
+            x = y.left;
+        else
+            x = y.right;
+
+        if (x != null)
+            x.p = y.p;
+
+        if (y.p == null) //y가 루트노드라면
+            t.root = x;
+        else {
+            if (y == y.p.left)
+                y.p.left = x;
+            else
+                y.p.right = x;
+        }
+
+        //y가 삭제하려는 노드가 아니라 successor
+        if (y != z)
+            z.data = y.data;
+
+        size--;
+        return y;
+    }
+
+    public static void main(String[] args) {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(binarySearchTree, new Node(30));
+        binarySearchTree.insert(binarySearchTree, new Node(20));
+        binarySearchTree.insert(binarySearchTree, new Node(25));
+        binarySearchTree.insert(binarySearchTree, new Node(40));
+        binarySearchTree.insert(binarySearchTree, new Node(10));
+        binarySearchTree.insert(binarySearchTree, new Node(35));
+
+        System.out.println(binarySearchTree.minimum(binarySearchTree.root).data);
+        System.out.println(binarySearchTree.maximum(binarySearchTree.root).data);
+        System.out.println(binarySearchTree.successor(binarySearchTree.root).data);
+        System.out.println(binarySearchTree.predecessor(binarySearchTree.root).data);
+
+        System.out.println(binarySearchTree.search(binarySearchTree.root, 35).data);
+
+        System.out.println(binarySearchTree.size);
+        binarySearchTree.delete(binarySearchTree, binarySearchTree.root);
+        System.out.println(binarySearchTree.size);
     }
 
 }
