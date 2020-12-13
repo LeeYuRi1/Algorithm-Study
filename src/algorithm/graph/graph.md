@@ -26,7 +26,7 @@
 
 - **인접행렬(adjacency matrix)**
 
-  ![1604917114431](C:\Users\LEE\AppData\Roaming\Typora\typora-user-images\1604917114431.png)
+  ![1604917114431](https://user-images.githubusercontent.com/33548856/102020923-aa4aaa80-3dbf-11eb-8ef0-7e4ce4027642.png)
 
   - i 와 j 사이에 edge가 있으면 i행 j열의 값이 1, 없으면 0
   - 저장 공간 크기: O(n^2)
@@ -39,7 +39,7 @@
 
   - 정점 집합을 표현하는 하나의 배열과 각 정점마다 인접한 정점들의 연결 리스트
 
-    ![1604917599715](C:\Users\LEE\AppData\Roaming\Typora\typora-user-images\1604917599715.png)
+    ![1604917599715](https://user-images.githubusercontent.com/33548856/102020942-c2bac500-3dbf-11eb-8996-8b72e1938615.png)
 
   - 노드의 개수: 2m (m: edge의 개수)
 
