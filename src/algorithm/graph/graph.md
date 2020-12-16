@@ -92,7 +92,7 @@
 
 ### 너비우선순회(BFS)
 
-![1607965824355](C:\Users\LEE\AppData\Roaming\Typora\typora-user-images\1607965824355.png)
+![1607965824355](https://user-images.githubusercontent.com/33548856/102384946-99dd3e80-4010-11eb-9a1d-4fda34fc7674.png)
 
 - **동심원 형태로 순회**
 
@@ -129,7 +129,7 @@
 <br/>
 
 - **BFS 트리**
-  ![1607965877562](C:\Users\LEE\AppData\Roaming\Typora\typora-user-images\1607965877562.png)
+ ![1607965877562](https://user-images.githubusercontent.com/33548856/102384958-9d70c580-4010-11eb-8686-753f0d401347.png)
   - 각 노드 v와 π[v]를 연결하는 에지들로 구성된 트리
   - BFS 트리에서 s에서 v까지의 경로는 s에서 v까지 가는 최단경로
   - 어떤 에지도 2개의 layer를 건너가지 않음(동일 레이어의 노드를 연결하거나, 혹은 1개의 layer를 건너감)
