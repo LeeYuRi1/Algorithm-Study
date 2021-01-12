@@ -5,22 +5,18 @@ import java.util.Scanner;
 public class Main_1934 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int count = sc.nextInt();
-        int[] result = new int[count];
+        int t = sc.nextInt();
 
-        for (int i = 0; i < count; i++) {
+        while (t-- > 0) {
             int a = sc.nextInt();
             int b = sc.nextInt();
-            result[i] = a * b / gcd_recursion(a, b);
-        }
-
-        for (int i = 0; i < count; i++) {
-            System.out.println(result[i]);
+            int l = a * b / gcd(a, b);
+            System.out.println(l);
         }
     }
 
-    private static int gcd_recursion(int num1, int num2) {
-        if (num2 == 0) return num1;
-        return gcd_recursion(num2, num1 % num2);
+    private static int gcd(int x, int y) {
+        if (y == 0) return x;
+        return gcd(y, x % y);
     }
 }
