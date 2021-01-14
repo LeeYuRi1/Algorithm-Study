@@ -7,19 +7,16 @@ public class Main_11005 {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int b = sc.nextInt();
-
-        String result = "";
+        StringBuilder sb = new StringBuilder();
 
         while (n > 0) {
             int r = n % b;
             if (r >= 10)
-                result += (char) (r - 10 + (int) 'A');
+                sb.append((char) (r - 10 + 'A')); // 10부터 A이므로 10을 빼고 아스키코드값 'A'를 더함
             else
-                result += (char) (r + (int) '0');
-            n = n / b;
+                sb.append((char) (r + '0')); // '0'을 더해서 아스키코드로 변환
+            n /= b;
         }
-
-        for (int i = result.length() - 1; i >= 0; i--)
-            System.out.print(result.charAt(i));
+        System.out.print(sb.reverse());
     }
 }
