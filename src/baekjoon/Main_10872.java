@@ -6,15 +6,10 @@ public class Main_10872 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-
-        System.out.println(factorial(n));
-    }
-
-    private static int factorial(int n) {
-        int result = 1;
-        for (int i = n; i > 0; i--) {
-            result *= i;
+        int answer = 1;
+        for (int i = 2; i <= n; i++) {
+            answer *= i;
         }
-        return result;
+        System.out.println(answer);
     }
 }
