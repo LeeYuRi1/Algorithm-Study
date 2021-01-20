@@ -4,7 +4,7 @@
 - 정렬은 O(NlogN)이 걸리는 정렬을 사용하는 것으로 함(퀵, 힙, 병합)
 - 직접 구현하는 것 보다는 array.sort, collections.sort를 사용하는 것이 좋음
 
-
+</br>
 
 ### Comparable vs Comparator
 
@@ -54,7 +54,7 @@ Arrays.sort(a, new Comparator<Point>() {
 - comparable은 compareTo를 구현하는데, natural 순서를 정의(ex.문자열의 natural 순서는 사전순)
 - comparator는 다른 순서로 정렬하고 싶을 때 사용(ex.문자열을 길이 순으로 정렬하고 싶을 때)
 
-
+</br>
 
 ### stable sorting
 
@@ -64,7 +64,7 @@ Arrays.sort(a, new Comparator<Point>() {
 - 시간복잡도가 NlogN인 정렬 알고리즘 중에는 병합 정렬(Merge Sort)가 있음
 
 
-
+</br></br>
 
 
 [출저: code.plus]
