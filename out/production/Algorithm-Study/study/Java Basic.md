@@ -1,8 +1,6 @@
 # java 기초 정리
 
-codeplus 강의
-
-
+</br>
 
 ## 입/출력
 
@@ -19,7 +17,7 @@ codeplus 강의
 
   - nextInt()와 nextLine()을 연속으로 쓸 경우 중간에 sc.nextLine(); 추가해야함
 
-
+</br>
 
 - **BufferedReader**
 
@@ -37,7 +35,7 @@ codeplus 강의
 
   - throws IOException 처리 해주기
 
-
+</br>
 
 - **StringTokenizer**
 
@@ -56,7 +54,7 @@ codeplus 강의
 
   - nextToken(): StringTokenizer객체에서 다음 토큰을 읽어옴
 
-
+</br>
 
 - **StringBuilder**
 
@@ -72,7 +70,7 @@ codeplus 강의
     System.out.print(sb);
     ```
 
-
+</br>
 
 ## Collections
 
@@ -95,12 +93,12 @@ codeplus 강의
 
   - ArrayList는 그래프 문제의 인접 리스트를 만들 때 가장 많이 사용
 
-
+</br>
 
 - **LinkedList**
   - 이중 연결 리스트
 
-
+</br>
 
 - **Stack**
 
@@ -115,7 +113,7 @@ codeplus 강의
     stack.push(num);
     ```
 
-
+</br>
 
 - **Set**
 
@@ -162,7 +160,7 @@ codeplus 강의
 
   - 일반적인 경우에는 HashSet, 순서가 중요한 경우에는 TreeSet, 입력으로 넣은 순서가 중요한 경우에는 LinkedHashSet을 사용
 
-
+</br>
 
 - **Map**
 
@@ -189,7 +187,7 @@ codeplus 강의
     }
     ```
 
-
+</br>
 
 - **Queue**
 
@@ -199,7 +197,7 @@ codeplus 강의
   - 인터페이스
   - 구현한 클래스로 ArrayDeque, LinkedList, PriorityQueue가 있음
 
-  
+  </br>
 
 - **PriorityQueue**
 
@@ -218,3 +216,8 @@ codeplus 강의
 
   - 최대힙은 compare 사용
 
+
+</br></br>
+
+
+[출저: code.plus]

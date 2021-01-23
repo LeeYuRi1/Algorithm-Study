@@ -10,7 +10,7 @@ public class CraneClawMachine {
         System.out.println(solution(board, moves));
     }
 
-    static public int solution(int[][] board, int[] moves) {
+    static private int solution(int[][] board, int[] moves) {
         int answer = 0;
         Stack<Integer> stack = new Stack<>();
 
