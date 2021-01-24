@@ -85,7 +85,7 @@
 - 양방향 그래프의 경우 A[i] [i]를 기준으로 대칭
 - 자주 사용하지 않음: 없는 간선도 저장하기 때문. 주로 쉬운 문제를 풀 때 사용
 
-![1611307487207](C:\Users\LEE\AppData\Roaming\Typora\typora-user-images\1611307487207.png)
+![1611307487207](https://user-images.githubusercontent.com/33548856/105579751-c16fb580-5dcb-11eb-869e-5906a361c044.png)
 
 ```java
 int n = sc.nextInt(); //정점 개수
@@ -118,7 +118,7 @@ for (int i = 0; i < m; i++) {
 
 - 가중치 없는 그래프
 
-![1611311231281](C:\Users\LEE\AppData\Roaming\Typora\typora-user-images\1611311231281.png)
+![1611311231281](https://user-images.githubusercontent.com/33548856/105579752-c59bd300-5dcb-11eb-9694-d089b9e58645.png)
 
 ```java
 int n = sc.nextInt();
@@ -140,7 +140,7 @@ for (int i = 0; i < m; i++) {
 
 - 가중치 있는 그래프
 
-![1611311826511](C:\Users\LEE\AppData\Roaming\Typora\typora-user-images\1611311826511.png)
+![1611311826511](https://user-images.githubusercontent.com/33548856/105579754-c896c380-5dcb-11eb-915d-e03e12f65ea5.png)
 
 </br>
 
