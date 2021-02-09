@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 // 이분 그래프
+// color[i] == 0 (아직 방문하지 않음)
+// color[i] == 1 (방문 했는데 정점의 색이 빨강)
+// color[i] == 2 (방문 했는데 정점의 색이 파랑)
 public class Main_1707 {
 
     static private ArrayList<Integer>[] a;
