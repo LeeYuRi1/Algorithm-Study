@@ -312,6 +312,135 @@ for (int i = 1; i <= n; i++) {
   check[i] == 1(방문 했는데 정점의 색이 빨강)
   check[i] == 2(방문 했는데 정점의 색이 파랑)
 
+```java
+boolean ok = true;
+for (int i = 1; i <= n; i++) {
+	if (color[i] == 0) dfs(i, 1);
+}
+
+//모든 정점과 간선에 대해 간선의 양 끝 점이 같으면 false, 다르면 true
+for (int i = 1; i <= n; i++) {
+	for (int j : a[i]) {
+		if (color[i] == color[j]) ok = false; //한번이라도 다르면 이분그래프가 아님
+	}
+}
+if (ok) System.out.println("YES");
+else System.out.println("NO");
+```
+
+
+
+</br></br>
+
+## 사이클 찾기
+
+- 순열이 주어졌을 때, 순열 사이클의 개수를 찾는 문제
+- DFS를 이용해서 이미 방문했던 수를 방문하면 return하는 방식으로 풀 수 있음
+
+```java
+int components = 0;
+for (int i = 1; i <= n; i++) {
+	if (!check[i]) {
+		dfs(i);
+		components++;
+	}
+}
+System.out.println(components);
+```
+
+</br></br>
+
+
+
+## 플러드 필
+
+- 어떤 위치와 연결된 모든 위치를 찾는 알고리즘
+- DFS나 BFS 탐색을 이용해서 풀 수 있음
+
+</br>
+
+- 이어져있는지 확인
+
+```java
+// 상하좌우
+static private int[] dx = {0, 0, 1, -1};
+static private int[] dy = {1, -1, 0, 0};
+
+for (int i = 0; i < h; i++) {
+	for (int j = 0; j < w; j++) {
+		if (a[i][j] == 1 && d[i][j] == 0) // 정점이고 아직 방문하지 않으면 dfs 호출
+			dfs(i, j, ++cnt, w, h);
+	}
+}
+
+//bfs
+private static void bfs(int x, int y, int cnt, int n) {
+	Queue<Pair> q = new LinkedList<>();
+	q.add(new Pair(x, y));
+	d[x][y] = cnt;
+	while (!q.isEmpty()) {
+		Pair p = q.remove();
+		x = p.x;
+		y = p.y;
+		for (int i = 0; i < 4; i++) {
+			int nx = x + dx[i];
+			int ny = y + dy[i];
+            //범위 안에 들어가는지 검사
+			if (0 <= nx && nx < n && 0 <= ny && ny < n) { 
+                // 간선이 있는지, 그 칸을 방문하지 않았는지 검사
+				if (a[nx][ny] == 1 && d[nx][ny] == 0) { 
+					q.add(new Pair(nx, ny));
+					d[nx][ny] = cnt;
+                }
+            }
+        }
+    }
+}
+
+//dfs
+private static void dfs(int x, int y, int cnt, int w, int h) {
+	d[x][y] = cnt;
+	for (int i = 0; i < 8; i++) {
+		int nx = x + dx[i];
+		int ny = y + dy[i];
+		if (0 <= nx && nx < h && 0 <= ny && ny < w) {
+			if (a[nx][ny] == 1 && d[nx][ny] == 0)
+				dfs(nx, ny, cnt, w, h);
+        }
+	}
+}
+```
+
+</br>
+
+- 최단거리 알고리즘
+- 모든 가중치가 1이면 최단거리 알고리즘을 bfs로 구할 수 있음(dfs로 문제를 풀 수 없음)
+
+```java
+private static void bfs(int n, int m) {
+	Queue<Pair_2178> q = new LinkedList();
+	q.add(new Pair_2178(0, 0));
+	check[0][0] = true;
+	dist[0][0] = 1;
+	while (!q.isEmpty()) {
+		Pair_2178 p = q.remove();
+		int x = p.x;
+		int y = p.y;
+		for (int i = 0; i < 4; i++) {
+			int nx = x + dx[i];
+			int ny = y + dy[i];
+			if (0 <= nx && nx < n && 0 <= ny && ny < m) {
+				if (check[nx][ny] == false && a[nx][ny] == 1) {
+					q.add(new Pair_2178(nx, ny));
+					check[nx][ny] = true;
+					dist[nx][ny] = dist[x][y] + 1;
+                }
+            }
+        }
+    }
+}
+```
+
 </br></br>
 
 [출저: code.plus]
