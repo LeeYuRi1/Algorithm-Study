@@ -1,5 +1,6 @@
 package programmers.level1;
 
+// 신규 아이디 추천
 public class RecommendNewId {
     public static void main(String[] args) {
         System.out.println(solution("=.="));

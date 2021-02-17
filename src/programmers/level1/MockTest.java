@@ -2,6 +2,7 @@ package programmers.level1;
 
 import java.util.*;
 
+// 모의고사
 public class MockTest {
     public static void main(String[] args) {
         int[] answers = {1, 2, 3, 4, 5};

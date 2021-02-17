@@ -2,6 +2,7 @@ package programmers.level1;
 
 import java.util.HashMap;
 
+// 완주하지 못한 선수
 public class UnfinishedPlayer {
     public static void main(String[] args) {
         String[] participant = {"mislav", "stanko", "mislav", "ana"};

@@ -3,6 +3,7 @@ package programmers.level1;
 import java.util.ArrayList;
 import java.util.Collections;
 
+// 두 개 뽑아서 더하기
 public class AddTwoNumber {
     public static void main(String[] args) {
         int[] numbers = {2, 1, 3, 4, 1};
