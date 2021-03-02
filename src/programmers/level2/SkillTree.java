@@ -4,6 +4,7 @@ package programmers.level2;
 public class SkillTree {
     public static void main(String[] args) {
         System.out.println(solution("CBD", new String[]{"BACDE", "CBADF", "AECB", "BDA"}));
+        System.out.println(solution2("CBD", new String[]{"BACDE", "CBADF", "AECB", "BDA"}));
     }
 
     static public int solution(String skill, String[] skill_trees) {
@@ -26,6 +27,16 @@ public class SkillTree {
                 }
             }
             if (check) answer++;
+        }
+        return answer;
+    }
+
+    // 다른 풀이
+    static public int solution2(String skill, String[] skill_trees) {
+        int answer = skill_trees.length;
+        for (int i = 0; i < skill_trees.length; i++) {
+            String s = skill_trees[i].replaceAll("[^" + skill + "]", "");
+            if (skill.indexOf(s) != 0) answer--;
         }
         return answer;
     }
