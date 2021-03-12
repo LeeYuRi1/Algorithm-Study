@@ -12,9 +12,7 @@ public class Main_1145 {
             answer++;
             int count = 0;
             for (int i = 0; i < s.length; i++) {
-                if (answer % Integer.parseInt(s[i]) == 0) {
-                    count++;
-                }
+                if (answer % Integer.parseInt(s[i]) == 0) count++;
             }
             if (count >= 3) break;
         }
