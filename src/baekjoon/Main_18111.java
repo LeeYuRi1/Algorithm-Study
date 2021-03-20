@@ -2,6 +2,7 @@ package baekjoon;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,16 +23,18 @@ public class Main_18111 {
             }
         }
 
-        long resultTime = 100000000000000l;
+        int resultTime = 999999999;
         int resultH = 0;
-        for (int i = 0; i <= 256; i++) {
+        int min = Collections.min(map.keySet());
+        int max = Collections.max(map.keySet());
+        for (int i = min; i <= max; i++) {
             int minus = 0;
             int plus = 0;
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                 int key = entry.getKey();
                 int value = entry.getValue();
-                if (i < key) plus += value;
-                else if (i > key) minus += value;
+                if (i < key) plus += value * (key - i);
+                else if (i > key) minus += value * (i - key);
             }
 
             if (b + plus >= minus) {
