@@ -1,4 +1,4 @@
 Algorithm-Study\
-out\
-.idea\
-Algorithm-Study.iml
+.idea
+*.iml
+out/
