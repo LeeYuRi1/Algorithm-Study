@@ -8,6 +8,7 @@ import java.util.Scanner;
 // 3. n을 1로 뺄 때 1로 만드는데 필요한 연산 횟수: d[n-1] + 1
 // d[n] = min(1, 2, 3)
 public class Main_1463 {
+
     private static int[] d;
 
     public static void main(String[] args) {
@@ -15,10 +16,6 @@ public class Main_1463 {
         int n = sc.nextInt();
         d = new int[n+1];
         System.out.println(go(n));
-
-        for (int i:d) {
-            System.out.print(i);
-        }
     }
 
     //시간복잡도: O(N) = N(채워야하는 d 배열의 칸의 개수) * O(1)(한칸을 채우기 위한 복잡도)
