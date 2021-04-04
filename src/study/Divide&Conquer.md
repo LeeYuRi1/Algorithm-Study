@@ -52,7 +52,7 @@ while (left <= right) {
 - 두 정렬한 결과를 하나로 합침
 - O(NlogN)이 걸림
 
-![1617453756785](C:\Users\LEE\AppData\Roaming\Typora\typora-user-images\1617453756785.png)
+![1617453756785](https://user-images.githubusercontent.com/33548856/113512768-120c4780-95a1-11eb-801c-9dbef4ccf8b9.png)
 
 ```java
 void sort(int start, int end) {
