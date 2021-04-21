@@ -7,6 +7,7 @@ public class Main_9466 {
 
     private static int[] a;
     private static int[] check;
+    private static int[] start;
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -16,10 +17,10 @@ public class Main_9466 {
             String[] s = br.readLine().split(" ");
             a = new int[n + 1];
             check = new int[n + 1];
+            start = new int[n + 1];
             for (int i = 1; i <= n; i++) {
                 a[i] = Integer.parseInt(s[i - 1]);
             }
-
             int count = 0;
             for (int i = 1; i <= n; i++) {
                 if (check[i] == 0) {
@@ -30,12 +31,13 @@ public class Main_9466 {
         }
     }
 
-    private static int dfs(int x, int num, int start) {
+    private static int dfs(int x, int num, int s) {
         if (check[x] != 0) {
-            if (x != start) return 0;
-            return check[x];
+            if (s != start[x]) return 0;
+            return num - check[x];
         }
         check[x] = num;
-        return dfs(a[x], num + 1, start);
+        start[x] = s;
+        return dfs(a[x], num + 1, s);
     }
 }
