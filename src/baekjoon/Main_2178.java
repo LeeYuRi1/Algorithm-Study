@@ -1,5 +1,8 @@
 package baekjoon;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -19,35 +22,32 @@ class Pair_2178 {
 public class Main_2178 {
 
     static private int[][] a;
-    static private boolean[][] check;
     static private int[][] dist;
     static private int[] dx = {0, 0, 1, -1};
     static private int[] dy = {1, -1, 0, 0};
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] s = br.readLine().split(" ");
+        int n = Integer.parseInt(s[0]);
+        int m = Integer.parseInt(s[1]);
 
         a = new int[n][m];
-        check = new boolean[n][m];
         dist = new int[n][m];
 
-        sc.nextLine();
         for (int i = 0; i < n; i++) {
-            String s = sc.nextLine();
+            String[] s1 = br.readLine().split("");
             for (int j = 0; j < m; j++) {
-                a[i][j] = s.charAt(j) - '0';
+                a[i][j] = Integer.parseInt(s1[j]);
             }
         }
         bfs(n, m);
-        System.out.println(dist[n-1][m-1]);
+        System.out.println(dist[n - 1][m - 1]);
     }
 
     private static void bfs(int n, int m) {
-        Queue<Pair_2178> q = new LinkedList();
+        Queue<Pair_2178> q = new LinkedList<>();
         q.add(new Pair_2178(0, 0));
-        check[0][0] = true;
         dist[0][0] = 1;
         while (!q.isEmpty()) {
             Pair_2178 p = q.remove();
@@ -57,9 +57,8 @@ public class Main_2178 {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
                 if (0 <= nx && nx < n && 0 <= ny && ny < m) {
-                    if (check[nx][ny] == false && a[nx][ny] == 1) {
+                    if (dist[nx][ny] == 0 && a[nx][ny] == 1) {
                         q.add(new Pair_2178(nx, ny));
-                        check[nx][ny] = true;
                         dist[nx][ny] = dist[x][y] + 1;
                     }
                 }
