@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Scanner;
 
 // dfs로 문제를 풀 수 없음. bfs 사용 (단계별로 진행)
 // 모든 가중치가 1이면 최단거리 알고리즘을 bfs로 구할 수 있음
