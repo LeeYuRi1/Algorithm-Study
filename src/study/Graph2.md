@@ -146,3 +146,68 @@ System.out.println(ans);
 - 가중치가 작은 Edge부터 순서대로 살펴봄
 - Edge e가 (u, v, c)일 때, u와 v가 다른 집합이면 e를 MST에 추가함
 
+</br>
+
+</br>
+
+## 최단 경로
+
+- 시작점이 1개일 때, 다른 모든 곳으로 가는 최단 경로 구하기
+  - a -> b로 가는 최단 경로는 최대 N-1개의 간선으로 이루어져 있음(정점: N개)
+  - 벨만포드 알고리즘: 식을 N-1번 검사
+- 시작점이 여러개일 때
+  - 다익스트라 알고리즘: 식을 모든 간선에 대해서 한번씩 검사
+
+</br>
+
+## Bellman-Ford 
+
+- 시간복잡도: O(VE)
+- 시작점이 1개
+- 가중치가 음수인 경우에도 사용할 수 있음(다익스트라는 불가)
+- 음수 사이클 검사 가능
+  - 음수 사이클이 존재하는 경우 최단경로는 없음
+  - 벨만포드 알고리즘을 N-1단계 반복한 후 1단계를 더 진행했을 때 변경된다면 음수사이클이 존재
+
+```java
+ArrayList<Edge_11657> g = new ArrayList<>();
+long[] d = new long[501];
+int inf = 100000000;
+for (int i = 0; i < m; i++) {
+	StringTokenizer st = new StringTokenizer(br.readLine());
+	int a = Integer.parseInt(st.nextToken());
+	int b = Integer.parseInt(st.nextToken());
+	int c = Integer.parseInt(st.nextToken());
+	g.add(new Edge_11657(a, b, c)); // 시작점, 도착점, 가중치 저장
+}
+for (int i = 1; i <= n; i++) {
+	d[i] = inf; // dist를 모두 무한대로 초기화
+}
+
+d[1] = 0;
+boolean negativeCycle = false;
+for (int i = 1; i <= n; i++) { //음수가 없다면 n-1
+	for (int j = 0; j < m; j++) { //정점마다 모든 간선을 한번씩 검사
+		int x = g.get(j).from;
+		int y = g.get(j).to;
+		int z = g.get(j).cost;
+        // 핵심 로직-dist[to] 가 dist[from]+cost보다 크면 dist[from]+cost을 넣어줌
+        //정점사이 간선이 여러개일 경우 d[x] != inf 조건 빼기
+		if (d[x] != inf && d[y] > d[x] + z) { 
+			d[y] = d[x] + z;
+            // 한단계를 더 진행했을 때 변경됐으므로 음수사이클이 있음
+			if (i == n) negativeCycle = true; 
+		}
+	}
+}
+
+// 최단경로 출력해주기
+if (negativeCycle) {
+	sb.append(-1);
+} else {
+	for (int i = 2; i <= n; i++) {
+		if (d[i] == inf) d[i] = -1; // 경로가 없다면 -1
+		sb.append(d[i] + "\n");
+	}
+}
+```
