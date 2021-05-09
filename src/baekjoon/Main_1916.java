@@ -14,6 +14,7 @@ class Edge_1916 {
     }
 }
 
+// 다익스트라 - 일반 배열 이용
 public class Main_1916 {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
