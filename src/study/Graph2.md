@@ -155,7 +155,7 @@ System.out.println(ans);
 - 시작점이 1개일 때, 다른 모든 곳으로 가는 최단 경로 구하기
   - a -> b로 가는 최단 경로는 최대 N-1개의 간선으로 이루어져 있음(정점: N개)
   - 벨만포드 알고리즘: 식을 N-1번 검사
-- 시작점이 여러개일 때
+  
   - 다익스트라 알고리즘: 식을 모든 간선에 대해서 한번씩 검사
 
 </br>
@@ -211,3 +211,69 @@ if (negativeCycle) {
 	}
 }
 ```
+
+</br>
+
+## 다익스트라
+
+- 시간 복잡도: O(V^2)
+- 가중치가 음수일 때는 사용할 수 없음
+- d[i]: 시작점에서 i까지 가는 최단 거리
+- c[i]: 정점 i가 체크되어 있으면 true, 아니면 false
+
+- 과정
+
+  1. 체크되어 있지 않은 정점 중에서 d의 값이 가장 작은 정점 x를 선택
+  2. x를 체크
+  3. x와 연결된 모든 정점을 검사
+     - 간선을 (x, y, z)라고 했을 때 d[y] > d[x]+z이면 갱신
+
+  - 1, 2, 3단계를 모든 정점을 체크할 때까지 계속함
+
+```java
+d[start] = 0;
+for (int i = 0; i < n - 1; i++) {
+	int min = inf + 1;
+	int x = -1;
+	for (int j = 1; j <= n; j++) {
+		if (!c[j] && min > d[j]) {
+			min = d[j];
+			x = j;
+		}
+	}
+	c[x] = true;
+	for (Edge_1916 j : a[x]) {
+		int y = j.to;
+		int w = j.cost;
+		if (d[y] > d[x] + w) {
+			d[y] = d[x] + w;
+		}
+	}
+}
+System.out.println(d[end]);
+```
+
+- 우선순위 큐 사용
+
+```java
+PriorityQueue<Edge> queue = new PriorityQueue<>();
+queue.add(new Edge(start, 0));
+Arrays.fill(d, Integer.MAX_VALUE);
+d[start] = 0;
+v[start] = 0;
+while (!queue.isEmpty()) {
+	Edge e = queue.poll();
+	int end = e.to;
+	if (!c[end]) { //간선이 여러개일 경우 제외
+		c[end] = true;
+		for (Edge edge : a[end]) {
+			if (!c[edge.to] && d[edge.to] > d[end] + edge.cost) {
+				d[edge.to] = d[end] + edge.cost;
+				queue.add(new Edge(edge.to, d[edge.to]));
+                v[edge.to] = end; //경로를 저장할 때 사용
+			}
+		}
+	}
+}
+```
+

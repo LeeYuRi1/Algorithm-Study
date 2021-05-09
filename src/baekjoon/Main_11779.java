@@ -64,7 +64,6 @@ public class Main_11779 {
                     queue.add(new Edge_11779(edge.to, d[edge.to]));
                     v[edge.to] = end;
                 }
-
             }
         }
     }
