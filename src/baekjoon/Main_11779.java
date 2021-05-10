@@ -18,7 +18,7 @@ class Edge_11779 implements Comparable<Edge_11779> {
 
     @Override
     public int compareTo(Edge_11779 o) {
-        return this.cost = o.cost;
+        return this.cost - o.cost;
     }
 }
 
