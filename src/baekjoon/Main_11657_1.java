@@ -5,25 +5,26 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-class Edge_11657 {
+class Edge_11657_1 {
     int from;
     int to;
     int cost;
 
-    Edge_11657(int from, int to, int cost) {
+    Edge_11657_1(int from, int to, int cost) {
         this.from = from;
         this.to = to;
         this.cost = cost;
     }
 }
 
-public class Main_11657 {
+// 벨만포드 사용
+public class Main_11657_1 {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] input = br.readLine().split(" ");
         int n = Integer.parseInt(input[0]);
         int m = Integer.parseInt(input[1]);
-        ArrayList<Edge_11657> g = new ArrayList<>();
+        ArrayList<Edge_11657_1> g = new ArrayList<>();
         long[] d = new long[501];
         int inf = 100000000;
         for (int i = 0; i < m; i++) {
@@ -31,7 +32,7 @@ public class Main_11657 {
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
             int c = Integer.parseInt(st.nextToken());
-            g.add(new Edge_11657(a, b, c));
+            g.add(new Edge_11657_1(a, b, c));
         }
         for (int i = 1; i <= n; i++) {
             d[i] = inf;
