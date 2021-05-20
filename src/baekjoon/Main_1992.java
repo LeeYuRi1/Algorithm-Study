@@ -17,17 +17,19 @@ public class Main_1992 {
                 num[i][j] = Integer.parseInt(s[j]);
             }
         }
-        tree(0, 0, n);
+        quadTree(0, 0, n);
         System.out.println(sb);
     }
 
-    private static void tree(int x, int y, int k) {
+    private static void quadTree(int x, int y, int k) {
         int l = k / 2;
-        if (!check(x, y, k)) {
+        if (check(x, y, k)) {
+            sb.append(num[x][y]);
+        } else {
             sb.append("(");
             for (int i = 0; i < 2; i++) {
                 for (int j = 0; j < 2; j++) {
-                    tree(x + i * l, y + j * l, l);
+                    quadTree(x + i * l, y + j * l, l);
                 }
             }
             sb.append(")");
@@ -41,7 +43,6 @@ public class Main_1992 {
                 if (num[i][j] != n) return false;
             }
         }
-        sb.append(n);
         return true;
     }
 }
