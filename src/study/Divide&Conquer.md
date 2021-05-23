@@ -56,7 +56,7 @@ while (left <= right) {
 
 ```java
 void sort(int start, int end) {
-	if (start == end) return; //크기가 1인 경우 종료
+	if (start == end) return; //크기가 1인 경우(정렬할 것이 없음) 종료
 	int mid = (start + end) / 2;
 	sort(start, mid); // 왼쪽 절반
 	sort(mid + 1, end); // 오른쪽 절반
