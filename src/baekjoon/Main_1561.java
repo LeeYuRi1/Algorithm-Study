@@ -22,11 +22,11 @@ public class Main_1561 {
             for (int i : num) child += (time - 1) / i;
             for (int i = 0; i < m; i++) {
                 if (time % num[i] == 0) {
+                    child++;
                     if (child == n) {
                         System.out.println(i + 1);
                         break;
                     }
-                    else child++;
                 }
             }
         }
