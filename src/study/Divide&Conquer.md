@@ -20,30 +20,6 @@
 
 </br>
 
-## 이분 탐색 (Binary Search)
-
-- 정렬되어 있는 리스트에서 어떤 값을 빠르게 찾는 알고리즘
-- 리스트의 크기를 N이라고 했을 때 logN의 시간이 걸림
-
-```java
-while (left <= right) {
-	int mid = (left + right) / 2; 
-    //오버플로우 날 수 있기 때문에 left + (right - left) / 2;로 쓸 수 있음
-	if (a[min] == x) {
-		position = mid;
-		break;
-	} else if (a[mid] > x) {
-		right = mid - 1;
-	} else {
-		left = mid + 1;
-	}
-}
-```
-
-</br>
-
-</br>
-
 ## 머지 소트 (Merge Sort)
 
 - N개를 정렬하는 알고리즘
