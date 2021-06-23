@@ -5,17 +5,17 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
 
-class Point_15683 {
+class Point_16234 {
     int x;
     int y;
 
-    Point_15683(int x, int y) {
+    Point_16234(int x, int y) {
         this.x = x;
         this.y = y;
     }
 }
 
-public class Main_15683 {
+public class Main_16234 {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] s1 = br.readLine().split(" ");
@@ -50,15 +50,15 @@ public class Main_15683 {
     }
 
     private static boolean bfs(int[][] country, boolean[][] check, int x, int y, int n, int l, int r) {
-        Queue<Point_15683> queue = new LinkedList<>();
-        Queue<Point_15683> sumQueue = new LinkedList<>();
+        Queue<Point_16234> queue = new LinkedList<>();
+        Queue<Point_16234> sumQueue = new LinkedList<>();
         int sum = 0;
-        queue.add(new Point_15683(x, y));
+        queue.add(new Point_16234(x, y));
         check[x][y] = true;
         int[] dx = {-1, 1, 0, 0};
         int[] dy = {0, 0, -1, 1};
         while (!queue.isEmpty()) {
-            Point_15683 p = queue.poll();
+            Point_16234 p = queue.poll();
             sumQueue.add(p);
             sum += country[p.x][p.y];
             for (int i = 0; i < 4; i++) {
@@ -67,7 +67,7 @@ public class Main_15683 {
                 if (nx >= 0 && nx < n && ny >= 0 && ny < n) {
                     int dif = Math.abs(country[p.x][p.y] - country[nx][ny]);
                     if (!check[nx][ny] && dif >= l && dif <= r) {
-                        queue.add(new Point_15683(nx, ny));
+                        queue.add(new Point_16234(nx, ny));
                         check[nx][ny] = true;
                     }
                 }
@@ -76,7 +76,7 @@ public class Main_15683 {
         if (sumQueue.size() == 1) return false;
         int add = sum / sumQueue.size();
         while (!sumQueue.isEmpty()) {
-            Point_15683 p = sumQueue.poll();
+            Point_16234 p = sumQueue.poll();
             country[p.x][p.y] = add;
         }
         return true;
