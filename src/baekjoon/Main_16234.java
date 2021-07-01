@@ -31,6 +31,7 @@ public class Main_16234 {
             }
         }
 
+        // 인구 이동이 없을 때까지 반복
         int ans = 0;
         while (true) {
             boolean[][] check = new boolean[n][n];
@@ -39,7 +40,7 @@ public class Main_16234 {
                 for (int j = 0; j < n; j++) {
                     if (!check[i][j]) {
                         boolean ok = bfs(country, check, i, j, n, l, r);
-                        if (ok) stop = false;
+                        if (ok) stop = false; // 인구이동이 한번이라도 있으면 체크
                     }
                 }
             }
@@ -51,7 +52,7 @@ public class Main_16234 {
 
     private static boolean bfs(int[][] country, boolean[][] check, int x, int y, int n, int l, int r) {
         Queue<Point_16234> queue = new LinkedList<>();
-        Queue<Point_16234> sumQueue = new LinkedList<>();
+        Queue<Point_16234> sumQueue = new LinkedList<>(); //연합된 나라들
         int sum = 0;
         queue.add(new Point_16234(x, y));
         check[x][y] = true;
@@ -73,6 +74,7 @@ public class Main_16234 {
                 }
             }
         }
+        // 연합된 나라의 개수가 1이라면 인구이동이 없고, 1 이상이면 연합의 인구수/개수로 바꾸어줌
         if (sumQueue.size() == 1) return false;
         int add = sum / sumQueue.size();
         while (!sumQueue.isEmpty()) {
