@@ -10,10 +10,15 @@ public class Dfs_2 {
             a[i] = new ArrayList<>();
         }
         a[1].add(2);
+        a[2].add(1); // 양방향 그래프
         a[2].add(5);
+        a[5].add(2);
         a[5].add(1);
+        a[1].add(5);
         a[3].add(4);
+        a[4].add(3);
         a[4].add(6);
+        a[6].add(4);
 
         boolean[] check = new boolean[n + 1];
         int count = 0;

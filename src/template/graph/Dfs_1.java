@@ -19,10 +19,15 @@ public class Dfs_1 {
             a2[i] = new ArrayList<>();
         }
         a2[1].add(2);
+        a2[2].add(1); // 양방향 그래프
         a2[1].add(3);
+        a2[3].add(1);
         a2[1].add(4);
+        a2[4].add(1);
         a2[2].add(4);
+        a2[4].add(2);
         a2[3].add(4);
+        a2[4].add(3);
 
         boolean[] check = new boolean[n + 1];
         dfs1(a1, check, 1, n);
