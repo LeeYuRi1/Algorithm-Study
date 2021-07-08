@@ -1,5 +1,6 @@
 package template.graph;
 
+// 사이클 구하기(예제 설명: 백준 9466)
 public class Dfs_3 {
     public static void main(String[] args) {
         int n = 7;

@@ -2,6 +2,7 @@ package template.graph;
 
 import java.util.ArrayList;
 
+// 연결요소의 개수 구하기(예제 설명: 백준 11724)
 public class Dfs_2 {
     public static void main(String[] args) {
         int n = 6;
