@@ -2,6 +2,7 @@ package template.graph;
 
 import java.util.ArrayList;
 
+// 시작 정점 1개에서 연결된 모든 정점을 dfs로 탐색
 public class Dfs_1 {
     public static void main(String[] args) {
         int n = 4;

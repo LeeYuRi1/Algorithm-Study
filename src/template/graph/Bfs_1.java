@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+// 시작 정점 1개에서 연결된 모든 정점을 bfs로 탐색
 public class Bfs_1 {
     public static void main(String[] args) {
         int n = 4;
