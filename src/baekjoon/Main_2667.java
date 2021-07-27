@@ -3,18 +3,15 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 // 플러드 필
 // 연결요소를 찾는 것과 유사
-// d[i][j] = (i, j)를 방문안했으면 0, 했으면 단지 번호
-class Pair {
+class Pair_2667 {
     int x;
     int y;
 
-    Pair(int x, int y) {
+    Pair_2667(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -23,7 +20,7 @@ class Pair {
 public class Main_2667 {
 
     static private int[][] a;
-    static private int[][] d;
+    static private boolean[][] check;
     static private int[] dx = {0, 0, 1, -1};
     static private int[] dy = {1, -1, 0, 0};
 
@@ -31,57 +28,45 @@ public class Main_2667 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
         a = new int[n][n];
+        check = new boolean[n][n];
         for (int i = 0; i < n; i++) {
-            String s = br.readLine();
+            String[] s = br.readLine().split("");
             for (int j = 0; j < n; j++) {
-                a[i][j] = s.charAt(j) - '0';
+                a[i][j] = Integer.parseInt(s[j]);
             }
         }
 
-        int cnt = 0;
-        d = new int[n][n];
+        ArrayList<Integer> ans = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (a[i][j] == 1 && d[i][j] == 0) // 정점이고 아직 방문하지 않으면 bfs 호출
-                    bfs(i, j, ++cnt, n);
-            }
-        }
-
-        int[] ans = new int[cnt];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (d[i][j] != 0) {
-                    ans[d[i][j] - 1] += 1;
+                if (a[i][j] == 1 && !check[i][j]) { // 정점이고 아직 방문하지 않으면 bfs 호출
+                    ans.add(bfs(i, j, n));
                 }
             }
         }
 
-        System.out.println(cnt);
-        Arrays.sort(ans);
-        for (int i = 0; i < cnt; i++) {
-            System.out.println(ans[i]);
-        }
+        Collections.sort(ans);
+        System.out.println(ans.size());
+        for (int i : ans) System.out.println(i);
     }
 
-    // dfs를 이용해도 가능
-    private static void bfs(int x, int y, int cnt, int n) {
-        Queue<Pair> q = new LinkedList<>();
-        q.add(new Pair(x, y));
-        d[x][y] = cnt;
+    private static int bfs(int x, int y, int n) {
+        Queue<Pair_2667> q = new LinkedList<>();
+        q.offer(new Pair_2667(x, y));
+        check[x][y] = true;
+        int count = 1;
         while (!q.isEmpty()) {
-            Pair p = q.remove();
-            x = p.x;
-            y = p.y;
+            Pair_2667 p = q.poll();
             for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
-                if (0 <= nx && nx < n && 0 <= ny && ny < n) { //범위 안에 들어가는지 검사
-                    if (a[nx][ny] == 1 && d[nx][ny] == 0) { // 간선이 있는지, 그 칸을 방문하지 않았는지 검사
-                        q.add(new Pair(nx, ny));
-                        d[nx][ny] = cnt;
-                    }
-                }
+                int nx = p.x + dx[i];
+                int ny = p.y + dy[i];
+                if (nx < 0 || nx >= n || ny < 0 || ny >= n) continue; //범위를 벗어난다면 넘어가기
+                if (a[nx][ny] == 0 || check[nx][ny]) continue; // 간선이 없거나 이미 방문했다면 넘어가기
+                q.add(new Pair_2667(nx, ny));
+                check[nx][ny] = true;
+                count++;
             }
         }
+        return count;
     }
 }
