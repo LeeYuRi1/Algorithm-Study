@@ -1,7 +1,8 @@
 package baekjoon;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 // 연결 요소
 public class Main_11724 {
@@ -9,10 +10,11 @@ public class Main_11724 {
     static private ArrayList<Integer>[] a;
     static private boolean[] check;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = sc.nextInt();
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] s1 = br.readLine().split(" ");
+        int n = Integer.parseInt(s1[0]);
+        int m = Integer.parseInt(s1[1]);
         a = new ArrayList[n + 1];
         check = new boolean[n + 1];
 
@@ -21,8 +23,9 @@ public class Main_11724 {
         }
 
         while (m-- > 0) {
-            int u = sc.nextInt();
-            int v = sc.nextInt();
+            String[] s2 = br.readLine().split(" ");
+            int u = Integer.parseInt(s2[0]);
+            int v = Integer.parseInt(s2[1]);
             a[u].add(v);
             a[v].add(u);
         }
