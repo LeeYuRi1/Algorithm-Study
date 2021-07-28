@@ -35,7 +35,7 @@ public class Main_7576 {
                 a[i][j] = Integer.parseInt(s2[j]);
                 dist[i][j] = -1;
                 if (a[i][j] == 1) {
-                    q.add(new Pair_7576(i, j));
+                    q.offer(new Pair_7576(i, j));
                     dist[i][j] = 0;
                 }
             }
@@ -61,16 +61,14 @@ public class Main_7576 {
 
     private static void bfs(Queue<Pair_7576> q, int n, int m) {
         while (!q.isEmpty()) {
-            Pair_7576 p = q.remove();
-            int x = p.x;
-            int y = p.y;
+            Pair_7576 p = q.poll();
             for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
+                int nx = p.x + dx[i];
+                int ny = p.y + dy[i];
                 if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
                 if (a[nx][ny] != 0 || dist[nx][ny] != -1) continue;
                 q.add(new Pair_7576(nx, ny));
-                dist[nx][ny] = dist[x][y] + 1;
+                dist[nx][ny] = dist[p.x][p.y] + 1;
             }
         }
     }
