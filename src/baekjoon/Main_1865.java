@@ -3,6 +3,7 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 class Edge_1865 {
     int from;
@@ -27,8 +28,6 @@ public class Main_1865 {
             int m = Integer.parseInt(input[1]);
             int w = Integer.parseInt(input[2]);
             ArrayList<Edge_1865> g = new ArrayList<>();
-            int[] dist = new int[n + 1];
-            int inf = 100000000;
             for (int i = 0; i < m + w; i++) {
                 String[] input2 = br.readLine().split(" ");
                 int s = Integer.parseInt(input2[0]);
@@ -38,27 +37,28 @@ public class Main_1865 {
                     g.add(new Edge_1865(s, e, t));
                     g.add(new Edge_1865(e, s, t));
                 } else {
-                    g.add(new Edge_1865(s, e, t * -1));
+                    g.add(new Edge_1865(s, e, -t));
                 }
             }
-            for (int i = 1; i <= n; i++) {
-                dist[i] = inf;
-            }
-            dist[1] = 0;
-            String ans = "NO";
-            for (int i = 1; i <= n; i++) {
-                for (int j = 0; j < g.size(); j++) {
-                    int x = g.get(j).from;
-                    int y = g.get(j).to;
-                    int z = g.get(j).cost;
-                    if (dist[y] > dist[x] + z) {
-                        dist[y] = dist[x] + z;
-                        if (i == n) ans = "YES";
-                    }
-                }
-            }
-            sb.append(ans + "\n");
+            sb.append(bellmanFord(g, n, m) + "\n");
         }
         System.out.println(sb);
+    }
+
+    private static String bellmanFord(ArrayList<Edge_1865> g, int n, int m) {
+        int[] d = new int[n + 1];
+        Arrays.fill(d, 100000000);
+        d[1] = 0;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < g.size(); j++) {
+                int s = g.get(j).from;
+                int e = g.get(j).to;
+                int t = g.get(j).cost;
+                if (d[e] <= d[s] + t) continue;
+                d[e] = d[s] + t;
+                if (i == n) return "YES";
+            }
+        }
+        return "NO";
     }
 }
