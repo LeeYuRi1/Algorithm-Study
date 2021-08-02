@@ -41,10 +41,10 @@ public class BellmanFord {
                 int start = g.get(j).start;
                 int end = g.get(j).end;
                 int time = g.get(j).time;
-                if (d[start] == inf) continue; // 시작점이 무한대이면 아직 최단경로를 구하지 않았으므로 넘어감
-                if (d[end] <= d[start] + time) continue; // start+time이 더 크다면 최단거리가 아니므로 넘어감
-                d[end] = d[start] + time;
-                if (i == n) negativeCycle = true; // i가 n인 경우에도 값이 변경되었으므로 음수사이클(최단경로가 존재하지 않음)
+                if (d[start] != inf && d[end] > d[start] + time) {  // 시작점이 무한대가 아니고 구한 값이 최단거리라면 변경
+                    d[end] = d[start] + time;
+                    if (i == n) negativeCycle = true; // i가 n인 경우에도 값이 변경되었으므로 음수사이클(최단경로가 존재하지 않음)
+                }
             }
         }
 
