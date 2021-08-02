@@ -62,7 +62,7 @@ public class Dijkstra {
             if (check[x]) continue; // 이미 방문했으면 넘어가기
             check[x] = true;
             for (Pair_Dijkstra y : a[x]) { // 연결된 정점들 탐색
-                if (dist[y.to] > dist[x] + y.cost) { // 현재 dist가 이미 있는 dist보다 작으면 최단경로이므로 변경
+                if (dist[y.to] > dist[x] + y.cost) { // 현재 dist+cost가 이미 있는 dist보다 작으면 최단경로이므로 변경
                     dist[y.to] = dist[x] + y.cost;
                     pq.offer(new Pair_Dijkstra(y.to, dist[y.to]));
                 }
