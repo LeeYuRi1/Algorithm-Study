@@ -3,64 +3,67 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.PriorityQueue;
 
-class Edge_1916 {
+class Pair_1916 implements Comparable<Pair_1916> {
     int to;
     int cost;
 
-    Edge_1916(int to, int cost) {
+    Pair_1916(int to, int cost) {
         this.to = to;
         this.cost = cost;
     }
+
+    @Override
+    public int compareTo(Pair_1916 o) {
+        return this.cost - o.cost;
+    }
 }
 
-// 다익스트라 - 일반 배열 이용
 public class Main_1916 {
+    private static ArrayList<Pair_1916>[] a;
+    private static int[] dist;
+    private static boolean[] check;
+
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
         int m = Integer.parseInt(br.readLine());
 
-        ArrayList<Edge_1916>[] a = new ArrayList[n + 1];
-        int[] d = new int[n + 1];
-        boolean[] c = new boolean[n + 1];
-        for (int i = 1; i <= n; i++) {
-            a[i] = new ArrayList<>();
-        }
-        for (int i = 0; i < m; i++) {
-            String[] input = br.readLine().split(" ");
-            int x = Integer.parseInt(input[0]);
-            int y = Integer.parseInt(input[1]);
-            int w = Integer.parseInt(input[2]);
-            a[x].add(new Edge_1916(y, w));
-        }
-        String[] input = br.readLine().split(" ");
-        int start = Integer.parseInt(input[0]);
-        int end = Integer.parseInt(input[1]);
+        a = new ArrayList[n + 1];
+        dist = new int[n + 1];
+        check = new boolean[n + 1];
+        for (int i = 1; i <= n; i++) a[i] = new ArrayList<>();
+        Arrays.fill(dist, 100000000);
 
-        int inf = 100000000;
-        for (int i = 1; i <= n; i++) {
-            d[i] = inf;
+        while (m-- > 0) {
+            String[] s = br.readLine().split(" ");
+            int x = Integer.parseInt(s[0]);
+            int y = Integer.parseInt(s[1]);
+            int w = Integer.parseInt(s[2]);
+            a[x].add(new Pair_1916(y, w));
         }
-        d[start] = 0;
-        for (int i = 0; i < n - 1; i++) {
-            int min = inf + 1;
-            int x = -1;
-            for (int j = 1; j <= n; j++) {
-                if (!c[j] && min > d[j]) {
-                    min = d[j];
-                    x = j;
+        String[] s = br.readLine().split(" ");
+        dijkstra(Integer.parseInt(s[0]));
+        System.out.println(dist[Integer.parseInt(s[1])]);
+    }
+
+    private static void dijkstra(int start) {
+        PriorityQueue<Pair_1916> pq = new PriorityQueue<>();
+        pq.offer(new Pair_1916(start, 0));
+        dist[start] = 0;
+        while (!pq.isEmpty()) {
+            Pair_1916 e = pq.poll();
+            int x = e.to;
+            if (check[x]) continue;
+            check[x] = true;
+            for (Pair_1916 y : a[x]) {
+                if (dist[y.to] > dist[x] + y.cost) {
+                    dist[y.to] = dist[x] + y.cost;
+                    pq.offer(new Pair_1916(y.to, dist[y.to]));
                 }
             }
-            c[x] = true;
-            for (Edge_1916 j : a[x]) {
-                int y = j.to;
-                int w = j.cost;
-                if (d[y] > d[x] + w) {
-                    d[y] = d[x] + w;
-                }
-            }
         }
-        System.out.println(d[end]);
     }
 }
