@@ -59,6 +59,7 @@ public class Dijkstra {
         while (!pq.isEmpty()) {
             Pair_Dijkstra p = pq.poll();
             int x = p.to;
+            // 양방향이거나 여러개의 간선이 존재한다면 확인 할 필요 없음
             if (check[x]) continue; // 이미 방문했으면 넘어가기
             check[x] = true;
             for (Pair_Dijkstra y : a[x]) { // 연결된 정점들 탐색
