@@ -2,6 +2,7 @@ package baekjoon;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -16,58 +17,54 @@ class Pair_7576 {
 }
 
 public class Main_7576 {
-    static private int[][] a;
+    private static int n, m;
+    static private int[][] arr;
     static private int[][] dist;
-    static private int[] dx = {0, 0, 1, -1};
-    static private int[] dy = {1, -1, 0, 0};
+    private static int[] dx = {-1, 1, 0, 0};
+    private static int[] dy = {0, 0, -1, 1};
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] s1 = br.readLine().split(" ");
-        int m = Integer.parseInt(s1[0]);
-        int n = Integer.parseInt(s1[1]);
-        a = new int[n][m];
+        m = Integer.parseInt(s1[0]);
+        n = Integer.parseInt(s1[1]);
+        arr = new int[n][m];
         dist = new int[n][m];
-        Queue<Pair_7576> q = new LinkedList<>();
+        Queue<Pair_7576> queue = new LinkedList<>();
+        for (int[] i : dist) Arrays.fill(i, -1);
         for (int i = 0; i < n; i++) {
             String[] s2 = br.readLine().split(" ");
             for (int j = 0; j < m; j++) {
-                a[i][j] = Integer.parseInt(s2[j]);
-                dist[i][j] = -1;
-                if (a[i][j] == 1) {
-                    q.offer(new Pair_7576(i, j));
+                arr[i][j] = Integer.parseInt(s2[j]);
+                if (arr[i][j] == 1) {
+                    queue.offer(new Pair_7576(i, j));
                     dist[i][j] = 0;
                 }
             }
         }
-        bfs(q, n, m);
-        // 얼마나 걸렸는지 알기 위해 dist의 최대값을 구함
+        bfs(queue);
         int ans = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (dist[i][j] > ans) ans = dist[i][j];
+                if (arr[i][j] == 0 && dist[i][j] == -1) {
+                    System.out.println(-1);
+                    return;
+                }
+                ans = Math.max(ans, dist[i][j]);
             }
         }
-
-        // 모두 익지 못하면 -1
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (a[i][j] == 0 && dist[i][j] == -1) ans = -1;
-            }
-        }
-
         System.out.println(ans);
     }
 
-    private static void bfs(Queue<Pair_7576> q, int n, int m) {
-        while (!q.isEmpty()) {
-            Pair_7576 p = q.poll();
+    private static void bfs(Queue<Pair_7576> queue) {
+        while (!queue.isEmpty()) {
+            Pair_7576 p = queue.poll();
             for (int i = 0; i < 4; i++) {
                 int nx = p.x + dx[i];
                 int ny = p.y + dy[i];
                 if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
-                if (a[nx][ny] != 0 || dist[nx][ny] != -1) continue;
-                q.add(new Pair_7576(nx, ny));
+                if (arr[nx][ny] != 0 || dist[nx][ny] != -1) continue;
+                queue.add(new Pair_7576(nx, ny));
                 dist[nx][ny] = dist[p.x][p.y] + 1;
             }
         }
