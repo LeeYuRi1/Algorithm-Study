@@ -6,20 +6,21 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Main_14502 {
-    private static int n, m;
-    private static int[][] area;
-    private static int ans = 0;
+    private static int n, m, ans = 0;
+    private static int[][] arr;
+    private static int[] dx = {-1, 1, 0, 0};
+    private static int[] dy = {0, 0, -1, 1};
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] s1 = br.readLine().split(" ");
-        n = Integer.parseInt(s1[0]);
-        m = Integer.parseInt(s1[1]);
-        area = new int[n][m];
+        String[] input1 = br.readLine().split(" ");
+        n = Integer.parseInt(input1[0]);
+        m = Integer.parseInt(input1[1]);
+        arr = new int[n][m];
         for (int i = 0; i < n; i++) {
-            String[] s2 = br.readLine().split(" ");
+            String[] input2 = br.readLine().split(" ");
             for (int j = 0; j < m; j++) {
-                area[i][j] = Integer.parseInt(s2[j]);
+                arr[i][j] = Integer.parseInt(input2[j]);
             }
         }
         backtracking(0);
@@ -33,28 +34,23 @@ public class Main_14502 {
         }
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (area[i][j] == 0) {
-                    area[i][j] = 1;
-                    backtracking(depth + 1);
-                    area[i][j] = 0;
-                }
+                if (arr[i][j] != 0) continue;
+                arr[i][j] = 1;
+                backtracking(depth + 1);
+                arr[i][j] = 0;
             }
         }
     }
 
     private static void bfs() {
         int[][] temp = new int[n][m];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                temp[i][j] = area[i][j];
-            }
-        }
-        int[] dx = {-1, 0, 1, 0};
-        int[] dy = {0, -1, 0, 1};
         Queue<int[]> queue = new LinkedList<>();
+        int count = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (temp[i][j] == 2) queue.add(new int[]{i, j});
+                temp[i][j] = arr[i][j];
+                if (temp[i][j] == 2) queue.offer(new int[]{i, j});
+                if (temp[i][j] > 0) count++;
             }
         }
         while (!queue.isEmpty()) {
@@ -63,22 +59,12 @@ public class Main_14502 {
                 int nx = p[0] + dx[i];
                 int ny = p[1] + dy[i];
                 if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
-                if (temp[nx][ny] == 0) {
-                    temp[nx][ny] = 2;
-                    queue.add(new int[]{nx, ny});
-                }
+                if (temp[nx][ny] != 0) continue;
+                temp[nx][ny] = 1;
+                queue.offer(new int[]{nx, ny});
+                count++;
             }
         }
-        check(temp);
-    }
-
-    private static void check(int[][] temp) {
-        int result = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (temp[i][j] == 0) result++;
-            }
-        }
-        ans = Math.max(ans, result);
+        ans = Math.max(ans, (n * m) - count);
     }
 }
