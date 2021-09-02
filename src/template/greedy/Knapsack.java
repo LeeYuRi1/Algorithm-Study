@@ -11,9 +11,7 @@ public class Knapsack {
         Arrays.sort(item, new Comparator<int[]>() {
             @Override
             public int compare(int[] o1, int[] o2) {
-                int v1 = o1[0] / o1[1];
-                int v2 = o2[0] / o2[1];
-                return v2 - v1;
+                return (o2[0] / o2[1]) - (o1[0] / o1[1]);
             }
         });
 
