@@ -1,25 +1,22 @@
 package baekjoon;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 // d[n] = 2*n을 채우는 방법의 수
 // d[n] = d[n-1] + d[n-2]
 public class Main_11726 {
-
-    private static int[] d;
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        d = new int[1001];
-        System.out.println(tiling(n));
-    }
-
-    private static int tiling(int n) {
-        if (n == 0 || n == 1) return 1;
-        if (d[n] > 0) return d[n];
-        d[n] = tiling(n - 1) + tiling(n - 2);
-        d[n] %= 10007;
-        return d[n];
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[] dp = new int[n + 2];
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+            dp[i] %= 10007;
+        }
+        System.out.println(dp[n]);
     }
 }
