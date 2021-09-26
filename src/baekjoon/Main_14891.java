@@ -1,58 +1,61 @@
 package baekjoon;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main_14891 {
-    public static void main(String[] args) throws Exception {
+    private static int[][] wheel;
+
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int[][] wheel = new int[4][8];
-        int[] top = new int[4];
+        wheel = new int[4][8];
         for (int i = 0; i < 4; i++) {
-            String[] s = br.readLine().split("");
+            String[] input1 = br.readLine().split("");
             for (int j = 0; j < 8; j++) {
-                wheel[i][j] = Integer.parseInt(s[j]);
+                wheel[i][j] = Integer.parseInt(input1[j]);
             }
         }
+
         int k = Integer.parseInt(br.readLine());
-        for (int i = 0; i < k; i++) {
-            String[] s = br.readLine().split(" ");
-            int n = Integer.parseInt(s[0]) - 1;
-            int d = Integer.parseInt(s[1]);
-
-            int originTop = top[n];
-            if (d == 1) top[n] = (top[n] + 7) % 8;
-            else top[n] = (top[n] + 1) % 8;
-
-            int origin = originTop;
-            int nd = d;
-            for (int j = n; j > 0; j--) {
-                if (wheel[j][(origin + 6) % 8] != wheel[j - 1][(top[j - 1] + 2) % 8]) {
-                    origin = top[j - 1];
-                    nd = -nd;
-                    if (nd == 1) top[j - 1] = (top[j - 1] + 7) % 8;
-                    else top[j - 1] = (top[j - 1] + 1) % 8;
-                } else break;
+        while (k-- > 0) {
+            String[] input2 = br.readLine().split(" ");
+            int n = Integer.parseInt(input2[0]) - 1;
+            int[] dir = new int[4];
+            dir[n] = Integer.parseInt(input2[1]);
+            for (int i = n; i < 3; i++) {
+                if (wheel[i][2] == wheel[i + 1][6]) break;
+                dir[i + 1] = dir[i] * -1;
             }
-
-            origin = originTop;
-            nd = d;
-            for (int j = n; j < 3; j++) {
-                if (wheel[j][(origin + 2) % 8] != wheel[j + 1][(top[j + 1] + 6) % 8]) {
-                    origin = top[j + 1];
-                    nd = -nd;
-                    if (nd == 1) top[j + 1] = (top[j + 1] + 7) % 8;
-                    else top[j + 1] = (top[j + 1] + 1) % 8;
-                } else break;
+            for (int i = n; i >= 1; i--) {
+                if (wheel[i][6] == wheel[i - 1][2]) break;
+                dir[i - 1] = dir[i] * -1;
             }
+            move(dir);
         }
 
         int ans = 0;
-        int score = 1;
         for (int i = 0; i < 4; i++) {
-            if (wheel[i][top[i]] == 1) ans += score;
-            score *= 2;
+            ans += wheel[i][0] * Math.pow(2, i);
         }
         System.out.println(ans);
+    }
+
+    private static void move(int[] dir) {
+        for (int i = 0; i < dir.length; i++) {
+            if (dir[i] == 1) { // 시계 방향
+                int temp = wheel[i][7];
+                for (int j = 7; j >= 1; j--) {
+                    wheel[i][j] = wheel[i][j - 1];
+                }
+                wheel[i][0] = temp;
+            } else if (dir[i] == -1) { // 반시계 방향
+                int temp = wheel[i][0];
+                for (int j = 0; j < 7; j++) {
+                    wheel[i][j] = wheel[i][j + 1];
+                }
+                wheel[i][7] = temp;
+            }
+        }
     }
 }
