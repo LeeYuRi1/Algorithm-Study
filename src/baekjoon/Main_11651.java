@@ -6,15 +6,15 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Comparator;
 
-class Point implements Comparable<Point> {
+class Point_11651 implements Comparable<Point_11651> {
     int x, y;
 
-    Point(int x, int y) {
+    Point_11651(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public int compareTo(Point that) {
+    public int compareTo(Point_11651 that) {
         if (this.x < that.x) {
             return -1;
         } else if (this.x == that.x) {
@@ -35,15 +35,15 @@ public class Main_11651 {
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(bf.readLine());
-        Point[] a = new Point[n];
+        Point_11651[] a = new Point_11651[n];
         for (int i = 0; i < n; i++) {
             String[] temp = bf.readLine().split(" ");
             int x = Integer.parseInt(temp[0]);
             int y = Integer.parseInt(temp[1]);
-            a[i] = new Point(x, y);
+            a[i] = new Point_11651(x, y);
         }
-        Arrays.sort(a, new Comparator<Point>() {
-            public int compare(Point p1, Point p2) {
+        Arrays.sort(a, new Comparator<Point_11651>() {
+            public int compare(Point_11651 p1, Point_11651 p2) {
                 if (p1.y < p2.y) {
                     return -1;
                 } else if (p1.y == p2.y) {
@@ -60,7 +60,7 @@ public class Main_11651 {
             }
         });
         StringBuilder sb = new StringBuilder();
-        for (Point p : a) {
+        for (Point_11651 p : a) {
             sb.append(p.x + " " + p.y + "\n");
         }
         System.out.println(sb);
