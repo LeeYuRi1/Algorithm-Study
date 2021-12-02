@@ -11,17 +11,12 @@ public class Main_2875 {
         int n = Integer.parseInt(input[0]);
         int m = Integer.parseInt(input[1]);
         int k = Integer.parseInt(input[2]);
-
-        int team = 0;
-        if (n / 2 > m) team = m;
-        else team = n / 2;
-        n -= team * 2;
-        m -= team;
-
-        if (k > n + m) {
-            k -= n + m;
-            team = ((3 * team) - k) / 3;
+        int ans = 0;
+        while (n + m >= k + 3 && n >= 2 && m >= 1) {
+            n -= 2;
+            m--;
+            ans++;
         }
-        System.out.println(team);
+        System.out.println(ans);
     }
 }
