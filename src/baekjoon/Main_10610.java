@@ -3,9 +3,7 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Arrays;
 
 // 30의 배수 = 2,3,5의 배수
 // 1. 2,5의 배수이면 0으로 끝나야 함
@@ -15,27 +13,23 @@ import java.util.List;
 public class Main_10610 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String s = br.readLine();
-        List<Integer> num = new ArrayList<>();
-        int sum = 0;
+        String[] input = br.readLine().split("");
+        int[] num = new int[input.length];
         boolean zero = false;
-        for (int i = 0; i < s.length(); i++) {
-            int n = s.charAt(i) - '0';
-            if (n == 0) zero = true;
-            sum += n;
-            num.add(n);
+        int sum = 0;
+        for (int i = 0; i < input.length; i++) {
+            num[i] = Integer.parseInt(input[i]);
+            if (num[i] == 0) zero = true;
+            sum += num[i];
         }
 
         StringBuilder sb = new StringBuilder();
-        if (sum % 3 == 0 && zero) {
-            Collections.sort(num, Collections.reverseOrder());
-            for (int i = 0; i < num.size(); i++) {
-                sb.append(num.get(i));
-            }
+        if (zero && sum % 3 == 0) {
+            Arrays.sort(num);
+            for (int i : num) sb.append(i);
+            System.out.println(sb.reverse());
         } else {
-            sb.append(-1);
+            System.out.println(-1);
         }
-        System.out.println(sb);
-
     }
 }
