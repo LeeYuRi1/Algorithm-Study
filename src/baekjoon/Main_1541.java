@@ -9,19 +9,16 @@ public class Main_1541 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] input = br.readLine().split("-");
-        int[] num = new int[input.length];
+        int ans = 0;
         for (int i = 0; i < input.length; i++) {
-            int n = 0;
-            String[] s = input[i].split("\\+");
-            for (int j = 0; j < s.length; j++) {
-                n += Integer.parseInt(s[j]);
+            int sum = 0;
+            String[] num = input[i].split("\\+");
+            for (int j = 0; j < num.length; j++) {
+                sum += Integer.parseInt(num[j]);
             }
-            num[i] = n;
+            if (i == 0) ans += sum;
+            else ans -= sum;
         }
-        int result = num[0];
-        for (int i = 1; i < num.length; i++) {
-            result -= num[i];
-        }
-        System.out.println(result);
+        System.out.println(ans);
     }
 }
