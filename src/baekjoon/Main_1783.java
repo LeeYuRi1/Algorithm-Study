@@ -13,16 +13,15 @@ public class Main_1783 {
         String[] input = br.readLine().split(" ");
         int n = Integer.parseInt(input[0]);
         int m = Integer.parseInt(input[1]);
-        StringBuilder sb = new StringBuilder();
-        if (n == 1) sb.append(1);
-        else if (n == 2) sb.append(Math.min(4, (m + 1) / 2));
-        else {
-            if (m >= 7) {
-                sb.append(m - 2);
-            } else {
-                sb.append(Math.min(4, m));
-            }
+        int ans = 0;
+        if (n == 1) {
+            ans = 1;
+        } else if (n == 2) {
+            ans = Math.min(4, (m + 1) / 2);
+        } else {
+            if (m >= 7) ans = m - 2;
+            else ans = Math.min(4, m);
         }
-        System.out.println(sb);
+        System.out.println(ans);
     }
 }
