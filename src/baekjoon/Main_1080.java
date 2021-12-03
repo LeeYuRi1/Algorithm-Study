@@ -5,51 +5,36 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main_1080 {
-
+    private static int n, m;
     private static int[][] a;
     private static int[][] b;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] input = br.readLine().split(" ");
-        int n = Integer.parseInt(input[0]);
-        int m = Integer.parseInt(input[1]);
+        n = Integer.parseInt(input[0]);
+        m = Integer.parseInt(input[1]);
         a = new int[n][m];
         b = new int[n][m];
-        int result = 0;
-
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n * 2; i++) {
             String[] s = br.readLine().split("");
             for (int j = 0; j < m; j++) {
-                a[i][j] = Integer.parseInt(s[j]);
+                if (i < n) a[i][j] = Integer.parseInt(s[j]);
+                else b[i - n][j] = Integer.parseInt(s[j]);
             }
         }
-        for (int i = 0; i < n; i++) {
-            String[] s = br.readLine().split("");
-            for (int j = 0; j < m; j++) {
-                b[i][j] = Integer.parseInt(s[j]);
-            }
-        }
-
-        if (n < 3 || m < 3) {
-            System.out.println(check(n, m));
-            return;
-        }
-
+        int ans = 0;
         for (int i = 0; i < n - 2; i++) {
             for (int j = 0; j < m - 2; j++) {
-                if (a[i][j] != b[i][j]) {
-                    change(i, j);
-                    result++;
-                }
+                if (a[i][j] == b[i][j]) continue;
+                convert(a, i, j);
+                ans++;
             }
         }
-
-        if (check(n, m) == -1) result = -1;
-        System.out.println(result);
+        System.out.println(check() ? ans : -1);
     }
 
-    private static void change(int x, int y) {
+    private static void convert(int[][] a, int x, int y) {
         for (int i = x; i < x + 3; i++) {
             for (int j = y; j < y + 3; j++) {
                 if (a[i][j] == 0) a[i][j] = 1;
@@ -58,14 +43,12 @@ public class Main_1080 {
         }
     }
 
-    private static int check(int n, int m) {
+    private static boolean check() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (a[i][j] != b[i][j]) {
-                    return -1;
-                }
+                if (a[i][j] != b[i][j]) return false;
             }
         }
-        return 0;
+        return true;
     }
 }
