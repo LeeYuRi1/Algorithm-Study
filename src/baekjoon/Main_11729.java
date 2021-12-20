@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 
 public class Main_11729 {
 
-    static private StringBuilder sb = new StringBuilder();
+    private static StringBuilder sb = new StringBuilder();
     private static int count = 0;
 
     public static void main(String[] args) throws Exception {
