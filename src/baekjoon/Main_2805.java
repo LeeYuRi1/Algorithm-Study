@@ -1,41 +1,35 @@
 package baekjoon;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Arrays;
 
 public class Main_2805 {
-
-    private static List<Integer> trees;
-
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] input = br.readLine().split(" ");
-        int n = Integer.parseInt(input[0]);
-        int m = Integer.parseInt(input[1]);
-        trees = new ArrayList<>();
+        String[] input1 = br.readLine().split(" ");
         String[] input2 = br.readLine().split(" ");
+        int n = Integer.parseInt(input1[0]);
+        int m = Integer.parseInt(input1[1]);
+        int[] len = new int[n];
         for (int i = 0; i < n; i++) {
-            trees.add(Integer.parseInt(input2[i]));
+            len[i] = Integer.parseInt(input2[i]);
         }
-        Collections.sort(trees);
-        System.out.println(findHeight(m));
+        Arrays.sort(len);
+        System.out.println(find(len, m));
     }
 
-    private static long findHeight(int m) {
-        long min = 0;
-        long max = trees.get(trees.size() - 1);
-        long mid = 0;
+    private static long find(int[] len, int m) {
+        long min = 0, max = len[len.length - 1], mid;
         while (min <= max) {
             mid = (min + max) / 2;
-            long sum = 0;
-            for (int i : trees) {
-                if (i > mid) sum += i - mid;
+            long result = 0;
+            for (int i : len) {
+                if (i > mid) result += i - mid;
             }
-            if (sum >= m) min = mid + 1;
-            else max = mid - 1;
+            if (result < m) max = mid - 1;
+            else min = mid + 1;
         }
         return max;
     }
