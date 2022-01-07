@@ -1,52 +1,50 @@
-package baekjoon;
+package samsung;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main_14889 {
-    private static int[][] ability;
-    private static int[] arr;
     private static int n, ans = Integer.MAX_VALUE;
+    private static int[][] num;
+    private static boolean[] team;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         n = Integer.parseInt(br.readLine());
-        ability = new int[n][n];
-        arr = new int[n / 2];
+        num = new int[n][n];
+        team = new boolean[n];
         for (int i = 0; i < n; i++) {
             String[] input = br.readLine().split(" ");
             for (int j = 0; j < n; j++) {
-                ability[i][j] = Integer.parseInt(input[j]);
+                num[i][j] = Integer.parseInt(input[j]);
             }
         }
-        selectTeam(0, 0);
+        divideTeam(0, 0);
         System.out.println(ans);
     }
 
-    private static void selectTeam(int depth, int start) {
+    private static void divideTeam(int depth, int start) {
         if (depth == n / 2) {
-            calculation();
+            ans = Math.min(ans, Math.abs(sumValue(true) - sumValue(false)));
             return;
         }
         for (int i = start; i < n; i++) {
-            arr[depth] = i;
-            selectTeam(depth + 1, i + 1);
+            team[i] = true;
+            divideTeam(depth + 1, i + 1);
+            team[i] = false;
         }
     }
 
-    private static void calculation() {
-        int[] team = new int[n];
-        for (int i : arr) team[i] = 1;
-        int sum1 = 0;
-        int sum2 = 0;
+    private static int sumValue(boolean teamValue) {
+        int result = 0;
         for (int i = 0; i < n - 1; i++) {
+            if (team[i] != teamValue) continue;
             for (int j = i + 1; j < n; j++) {
-                int t = team[i] + team[j];
-                if (t == 0) sum1 += ability[i][j] + ability[j][i];
-                if (t == 2) sum2 += ability[i][j] + ability[j][i];
+                if (team[j] != teamValue) continue;
+                result += num[i][j] + num[j][i];
             }
         }
-        ans = Math.min(ans, Math.abs(sum1 - sum2));
+        return result;
     }
 }
