@@ -1,4 +1,4 @@
-package baekjoon;
+package samsung;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,15 +12,11 @@ public class Main_13458 {
         String[] input2 = br.readLine().split(" ");
         int b = Integer.parseInt(input2[0]);
         int c = Integer.parseInt(input2[1]);
-
-        long ans = 0;
+        long ans = 0; // long 주의!
         for (int i = 0; i < n; i++) {
-            int candidate = Integer.parseInt(input1[i]) - b;
             ans++;
-            if (candidate > 0) {
-                ans += candidate / c;
-                if (candidate % c != 0) ans++;
-            }
+            int num = Integer.parseInt(input1[i]) - b;
+            if (num > 0) ans += num % c == 0 ? num / c : num / c + 1;
         }
         System.out.println(ans);
     }
