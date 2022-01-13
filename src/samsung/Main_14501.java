@@ -1,4 +1,4 @@
-package baekjoon;
+package samsung;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,21 +15,12 @@ public class Main_14501 {
             time[i] = Integer.parseInt(input[0]);
             price[i] = Integer.parseInt(input[1]);
         }
-
-        int[] dp = new int[n];
+        int[] dp = new int[n + 1];
         for (int i = 0; i < n; i++) {
-            dp[i] = price[i];
-            for (int j = 0; j < i; j++) {
-                if (j + time[j] <= i) {
-                    dp[i] = Math.max(dp[i], dp[j] + price[i]);
-                }
-            }
+            int nextT = i + time[i]; // 현재 + 상담일
+            if (nextT <= n) dp[nextT] = Math.max(dp[nextT], dp[i] + price[i]); // 범위를 초과하지 않으면 금액을 더해줌
+            dp[i + 1] = Math.max(dp[i], dp[i + 1]); // 금액 유지
         }
-
-        int ans = 0;
-        for (int i = 0; i < n; i++) {
-            if (i + time[i] < n + 1) ans = Math.max(ans, dp[i]);
-        }
-        System.out.println(ans);
+        System.out.println(dp[n]);
     }
 }
