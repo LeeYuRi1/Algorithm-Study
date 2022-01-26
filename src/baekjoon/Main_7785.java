@@ -10,24 +10,18 @@ import java.util.List;
 
 public class Main_7785 {
     public static void main(String[] args) throws IOException {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        HashSet hashSet = new HashSet();
-
-        int n = Integer.parseInt(bf.readLine());
-        for (int i = 0; i < n; i++) {
-            String[] input = bf.readLine().split(" ");
-            if (input[1].equals("enter")) {
-                hashSet.add(input[0]);
-            } else if (input[1].equals("leave")) {
-                hashSet.remove(input[0]);
-            }
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int n = Integer.parseInt(br.readLine());
+        HashSet<String> set = new HashSet<>();
+        while (n-- > 0) {
+            String[] input = br.readLine().split(" ");
+            if (input[1].equals("enter")) set.add(input[0]);
+            else set.remove(input[0]);
         }
-
-        List<String> nameList = new ArrayList<>(hashSet);
-        Collections.sort(nameList, Collections.reverseOrder());
-
-        for (int i = 0; i <= nameList.size() - 1; i++) {
-            System.out.println(nameList.get(i));
-        }
+        List<String> ans = new ArrayList<>(set);
+        ans.sort(Collections.reverseOrder());
+        for (String s : ans) sb.append(s).append("\n");
+        System.out.println(sb);
     }
 }
