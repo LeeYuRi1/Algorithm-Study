@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
-// 소요 시간 : 151 ms
-// 메모리 사용량 : 27,392 kb
+// 소요 시간 : 144 ms
+// 메모리 사용량 : 24,136 kb
 public class Solution_1873 {
     private static char[][] area;
     private static HashMap<Character, Integer> mapIntD; // 방향 문자로 d값을 찾음
@@ -41,7 +41,8 @@ public class Solution_1873 {
                     if (mapIntD.containsKey(area[i][j])) {
                         x = i;
                         y = j;
-                        d = mapIntD.get(area[i][j]);
+                        d = mapIntD.get(area[x][y]);
+                        area[x][y] = '.';
                     }
                 }
             }
@@ -52,10 +53,10 @@ public class Solution_1873 {
                 move(input.charAt(i));
             }
             // 결과
+            area[x][y] = mapCharD.get(d);
             sb.append("#" + testCase + " ");
             for (int i = 0; i < h; i++) {
                 for (int j = 0; j < w; j++) {
-                    if (area[i][j] == '0') area[i][j] = mapCharD.get(d);
                     sb.append(area[i][j]);
                 }
                 sb.append("\n");
@@ -68,24 +69,24 @@ public class Solution_1873 {
         if (c == 'S') { // S 현재 바라보고 있는 방향으로 포탄을 발사 - 벽에 부딪히면 소멸, 벽이 벽돌벽이면 평지로 바꿈
             int nx = x;
             int ny = y;
-            while (true) {
-                nx += dx[d];
-                ny += dy[d];
-                if (nx < 0 || nx >= h || ny < 0 || ny >= w || area[nx][ny] == '#') break;
+            while (checkRange(nx, ny)) {
+                if (area[nx][ny] == '#') break;
                 if (area[nx][ny] == '*') {
                     area[nx][ny] = '.';
                     break;
                 }
+                nx += dx[d];
+                ny += dy[d];
             }
         } else { // U D L R - 전차 방향 바꾸고 한칸 앞이 평지라면 그 칸으로 이동
             d = mapIntD.get(c);
-            int nx = x + dx[d];
-            int ny = y + dy[d];
-            if (nx < 0 || nx >= h || ny < 0 || ny >= w || area[nx][ny] != '.') return;
-            area[x][y] = '.';
-            x = nx;
-            y = ny;
-            area[x][y] = '0'; // 전차 모양 임의로 0 - 마지막에 바꾸기
+            if (!checkRange(x + dx[d], y + dy[d]) || area[x + dx[d]][y + dy[d]] != '.') return;
+            x += dx[d];
+            y += dy[d];
         }
+    }
+
+    private static boolean checkRange(int x, int y) {
+        return x >= 0 && x < h && y >= 0 && y < w;
     }
 }
