@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-// 소요 시간 : 183 ms
-// 메모리 사용량 : 20,424 kb
+// 소요 시간 : 177 ms
+// 메모리 사용량 : 20,716 kb
 public class Solution_5215 {
     private static int n, l, ans;
     private static int[] taste;
@@ -37,8 +37,10 @@ public class Solution_5215 {
 
     private static void select(int cnt, int sumT, int sumC) {
         if (sumC > l) return;
-        else ans = Math.max(ans, sumT);
-        if (cnt == n) return;
+        if (cnt == n) {
+            ans = Math.max(ans, sumT);
+            return;
+        }
         select(cnt + 1, sumT + taste[cnt], sumC + calorie[cnt]);
         select(cnt + 1, sumT, sumC);
     }
