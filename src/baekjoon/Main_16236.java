@@ -3,27 +3,27 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.StringTokenizer;
 
+//소요 시간 : 88 ms
+//메모리 사용량 : 12560 kb
 public class Main_16236 {
-    private static int n, x, y, size = 2;
-    private static int[][] area;
-    private static int[][] dist;
+    private static int N, x, y, size, min;
+    private static int area[][], dist[][];
     private static int[] dx = {-1, 1, 0, 0};
     private static int[] dy = {0, 0, -1, 1};
-    private static int minX, minY, minD;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        n = Integer.parseInt(br.readLine());
-        area = new int[n][n];
-        dist = new int[n][n];
-        for (int i = 0; i < n; i++) {
-            String[] input = br.readLine().split(" ");
-            for (int j = 0; j < n; j++) {
-                area[i][j] = Integer.parseInt(input[j]);
+        StringTokenizer st;
+        N = Integer.parseInt(br.readLine());
+        area = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
+            for (int j = 0; j < N; j++) {
+                area[i][j] = Integer.parseInt(st.nextToken());
                 if (area[i][j] == 9) {
                     x = i;
                     y = j;
@@ -31,24 +31,20 @@ public class Main_16236 {
                 }
             }
         }
-
-        int time = 0;
-        int eat = 0;
+        size = 2;
+        int eat = 0, time = 0;
         while (true) {
-            minX = Integer.MAX_VALUE;
-            minY = Integer.MAX_VALUE;
-            for (int[] i : dist) Arrays.fill(i, -1);
+            dist = new int[N][N];
+            min = Integer.MAX_VALUE;
             bfs();
-            if (minX == Integer.MAX_VALUE) break; // 더 이상 먹을 수 있는 물고기가 공간에 없으면 끝냄
-            x = minX; // 먹을 수 있고, 거리가 가장 가까운 물고기의 위치를 현재 위치로 함
-            y = minY;
+            if (min == Integer.MAX_VALUE) break; // 최소거리가 업데이트 되지 않았다면 먹을 수 있는 물고기가 없음
+            time += dist[x][y] - 1;
+            area[x][y] = 0;
             eat++;
-            if (eat == size) { // 상어의 크기만큼 물고기를 먹으면 크기 증가
+            if (eat == size) {
                 eat = 0;
                 size++;
             }
-            time += dist[x][y]; // 물고기를 먹으러 간 만큼의 시간동안 증가
-            area[x][y] = 0;
         }
         System.out.println(time);
     }
@@ -56,36 +52,30 @@ public class Main_16236 {
     private static void bfs() {
         Queue<int[]> queue = new LinkedList<>();
         queue.offer(new int[]{x, y});
-        dist[x][y] = 0;
-        minD = Integer.MAX_VALUE; // 먹을 수 있는 물고기가 존재하는 최소거리
+        dist[x][y] = 1;
         while (!queue.isEmpty()) {
-            int[] p = queue.poll();
+            int[] cur = queue.poll();
+            if (dist[cur[0]][cur[1]] > min) return; // 현재 dist가 최소거리보다 크다면 이제 고려할 일 없음
             for (int i = 0; i < 4; i++) {
-                int nx = p[0] + dx[i];
-                int ny = p[1] + dy[i];
-                if (nx < 0 || nx >= n || ny < 0 || ny >= n) continue;
-                if (dist[nx][ny] != -1 || area[nx][ny] > size) continue; // 방문하지 않았고, 현재 크기보다 작거나 같으면 지나갈 수 있음
-                dist[nx][ny] = dist[p[0]][p[1]] + 1;
-                if (area[nx][ny] > 0 && area[nx][ny] < size) minDist(nx, ny); // 1이상이고 크기보다 작아야 먹을 수 있음
+                int nx = cur[0] + dx[i];
+                int ny = cur[1] + dy[i];
+                if (nx < 0 || nx >= N || ny < 0 || ny >= N) continue;
+                if (area[nx][ny] > size || dist[nx][ny] > 0) continue; // 아기상어 크기보다 크거나, 이미 지나간 길이면 지나갈 수 없음
                 queue.offer(new int[]{nx, ny});
+                dist[nx][ny] = dist[cur[0]][cur[1]] + 1;
+                if (findMinDist(dist[nx][ny], nx, ny)) { // 가장 가까운 물고기 찾기
+                    min = dist[nx][ny]; // 제일 가까운 거리로 업데이트
+                    x = nx;
+                    y = ny;
+                }
             }
         }
     }
 
-    private static void minDist(int nx, int ny) {
-        if (dist[nx][ny] < minD) { // 가장 가까운 거리라면
-            minD = dist[nx][ny];
-            minX = nx;
-            minY = ny;
-        }
-        if (dist[nx][ny] == minD) { // 가까운 거리의 물고기가 여러개면
-            if (nx < minX) { // 가장 위에 있는 물고기
-                minX = nx;
-                minY = ny;
-            } else if (nx == minX && ny < minY) { // 같은 높이라면 가장 왼쪽
-                minX = nx;
-                minY = ny;
-            }
-        }
+    private static boolean findMinDist(int d, int nx, int ny) {
+        if (area[nx][ny] == 0 || area[nx][ny] == size) return false; // 0이거나 아기상어의 사이즈와 같다면 먹을 수 없음
+        if (d < min) return true;
+        if (d == min && ((nx < x) || (nx == x && ny < y))) return true;
+        return false;
     }
 }
