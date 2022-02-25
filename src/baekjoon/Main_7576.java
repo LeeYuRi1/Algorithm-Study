@@ -1,72 +1,65 @@
 package baekjoon;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.StringTokenizer;
 
-class Pair_7576 {
-    int x;
-    int y;
-
-    Pair_7576(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-}
-
+// 소요 시간 : 604 ms
+// 메모리 사용량 : 124344 kb
 public class Main_7576 {
-    private static int n, m;
-    static private int[][] arr;
-    static private int[][] dist;
+    private static int N, M, area[][], dist[][];
     private static int[] dx = {-1, 1, 0, 0};
     private static int[] dy = {0, 0, -1, 1};
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] s1 = br.readLine().split(" ");
-        m = Integer.parseInt(s1[0]);
-        n = Integer.parseInt(s1[1]);
-        arr = new int[n][m];
-        dist = new int[n][m];
-        Queue<Pair_7576> queue = new LinkedList<>();
-        for (int[] i : dist) Arrays.fill(i, -1);
-        for (int i = 0; i < n; i++) {
-            String[] s2 = br.readLine().split(" ");
-            for (int j = 0; j < m; j++) {
-                arr[i][j] = Integer.parseInt(s2[j]);
-                if (arr[i][j] == 1) {
-                    queue.offer(new Pair_7576(i, j));
-                    dist[i][j] = 0;
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        M = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
+        area = new int[N][M];
+        dist = new int[N][M];
+        Queue<int[]> queue = new LinkedList<>();
+        int count = 0;
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
+            for (int j = 0; j < M; j++) {
+                area[i][j] = Integer.parseInt(st.nextToken());
+                if (area[i][j] == 1) {
+                    queue.offer(new int[]{i, j});
+                    dist[i][j] = 1;
                 }
+                if (area[i][j] != 0) count++;
             }
         }
-        bfs(queue);
-        int ans = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (arr[i][j] == 0 && dist[i][j] == -1) {
-                    System.out.println(-1);
-                    return;
-                }
-                ans = Math.max(ans, dist[i][j]);
-            }
-        }
-        System.out.println(ans);
+        System.out.println((count == N * M) ? 0 : bfs(queue));
     }
 
-    private static void bfs(Queue<Pair_7576> queue) {
+    private static int bfs(Queue<int[]> queue) {
         while (!queue.isEmpty()) {
-            Pair_7576 p = queue.poll();
+            int[] cur = queue.poll();
             for (int i = 0; i < 4; i++) {
-                int nx = p.x + dx[i];
-                int ny = p.y + dy[i];
-                if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
-                if (arr[nx][ny] != 0 || dist[nx][ny] != -1) continue;
-                queue.add(new Pair_7576(nx, ny));
-                dist[nx][ny] = dist[p.x][p.y] + 1;
+                int nx = cur[0] + dx[i];
+                int ny = cur[1] + dy[i];
+                if (nx < 0 || nx >= N || ny < 0 || ny >= M) continue;
+                if (dist[nx][ny] > 0 || area[nx][ny] != 0) continue;
+                queue.offer(new int[]{nx, ny});
+                dist[nx][ny] = dist[cur[0]][cur[1]] + 1;
             }
         }
+        return getMaxDist();
+    }
+
+    private static int getMaxDist() {
+        int max = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                if (area[i][j] == 0 && dist[i][j] == 0) return -1;
+                max = Math.max(max, dist[i][j]);
+            }
+        }
+        return max - 1;
     }
 }
