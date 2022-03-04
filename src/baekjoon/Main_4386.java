@@ -20,8 +20,8 @@ public class Main_4386 {
         double[] minEdge = new double[N];
         boolean[] visited = new boolean[N];
         for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                double d = Math.sqrt(Math.pow(Math.abs(stars[i][0] - stars[j][0]), 2) + Math.pow(Math.abs(stars[i][1] - stars[j][1]), 2));
+            for (int j = i + 1; j < N; j++) {
+                double d = Math.sqrt(Math.pow(stars[i][0] - stars[j][0], 2) + Math.pow(stars[i][1] - stars[j][1], 2));
                 dist[i][j] = dist[j][i] = d;
             }
             minEdge[i] = Integer.MAX_VALUE;
